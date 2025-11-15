@@ -1,11 +1,18 @@
 import cv2
-from flask import Flask, render_template, Response
+#import numpy as np
+from flask import Flask, render_template, Response, request
+
+import gemini_api
+from gemini_api import generateFantasyStory
 
 app = Flask(__name__)
 
 # Initialize the camera
 # Using 0 for the default webcam. Change this if you have multiple cameras.
 camera = cv2.VideoCapture(0)
+
+image = 0
+i = 0
 
 def generate_frames():
     """Generator function to capture frames from the camera and yield them."""
@@ -19,6 +26,9 @@ def generate_frames():
             # Encode the frame in JPEG format
             # .jpg is used for streaming as it's efficient
             ret, buffer = cv2.imencode('.jpg', frame)
+            global image 
+            image = frame
+
             if not ret:
                 print("Failed to encode frame")
                 continue
@@ -30,8 +40,13 @@ def generate_frames():
             # This format includes the boundary and content type
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
-
-
+            
+def take_picture():
+    global image, i
+    print("taking a picture")
+    output_path = "./images/img" + str(i) + ".png"
+    success = cv2.imwrite(output_path, image)
+    i += 1
 
 def process_and_save():
     result = "TEMPORARY TESTING" #replace with actual data from AI
@@ -55,6 +70,18 @@ def video_feed():
     # The mimetype tells the browser this is a multipart stream.
     return Response(generate_frames(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route("/take_picture_func")
+def picture_taking_function():
+    print("running")
+    take_picture()
+    return "pictures taken"
+
+@app.route("/generate_story_func")
+def story_generating_function():
+    print("running")
+    generateFantasyStory()
+    return "story generated"
 
 
 if __name__ == '__main__':
