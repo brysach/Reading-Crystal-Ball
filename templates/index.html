@@ -45,11 +45,25 @@
 
 
     <div id="storyBox">hi</div>
+    
+    <script src="https://js.puter.com/v2/"></script>
+    <button id="speak">Speak</button>
 
     <script>
         var storyData = {{ storyData|tojson }};
 
         document.getElementById("storyBox").innerText = storyData;
+
+        document.getElementById("speak").onclick = async () => {
+            let t = storyData;
+
+            try {
+                const audio = await puter.ai.txt2speech(t);
+                audio.play();
+            } catch (err) {
+                console.log("TTS error:", err);
+            }
+        };
     </script>
 </body>
 </html>
