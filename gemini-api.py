@@ -16,7 +16,11 @@ def generateFantasyStory():
     images_array.clear()
     for image_name in os. listdir(folder_dir):
         if image_name.endswith(".png"):
-           images_array.append(Image.open(os.path.join(folder_dir, image_name)))
+            filename = os.path.join(folder_dir, image_name)
+            images_array.append(Image.open(filename))
+            os.remove(filename)
+
+
 
     response = client.models.generate_content(
         model = "gemini-2.5-flash",
@@ -30,4 +34,5 @@ def generateFantasyStory():
 
     return response
 
-generateFantasyStory()
+if __name__ == "__main__":
+    generateFantasyStory()
