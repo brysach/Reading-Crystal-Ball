@@ -20,11 +20,22 @@ def generateFantasyStory():
             images_array.append(Image.open(filename))
             os.remove(filename)
 
-
+    prompt = (
+        "You are a friendly storyteller for children.\n"
+        "Write ONE short, kid-friendly fantasy paragraph (4–6 simple sentences) "
+        "inspired by the objects in these images. "
+        "Give the items magical roles in the story.\n"
+        "Requirements:\n"
+        "- Audience: kids around 7–10 years old.\n"
+        "- Use simple, clear vocabulary and short sentences.\n"
+        "- Keep the tone warm, positive, and hopeful.\n"
+        "- No violence, horror, blood, death, or scary monsters.\n"
+        "- Do NOT mention the images or filenames; just tell the story.\n"
+    )
 
     response = client.models.generate_content(
         model = "gemini-2.5-flash",
-        contents = ["Can you make up a one conclusive paragraph fantasy story based off these images, focusing on the items", images_array]
+        contents = [prompt, images_array]
     )
 
     story_text = response.text
