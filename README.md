@@ -11,3 +11,12 @@
 #### 4. Set an evironment variable with `export GEMINI_API_KEY=<key>`
 #### 5. `python FlaskTesting.py`
 #### 6. Go to the url 127.0.0.1:5002
+
+# Authors
+  * Quinton Wu - <b>[simpleCaci](https://github.com/simplecaci/)</b>
+  * Kevin Pember - <b>[Kevin-Pember](https://github.com/kevin-pember/)
+  * Bryan Estrada - <b>[brysach](https://github.com/brysach/)</b>
+  * Daniel Gifford - <b>[dannygiff](https://github.com/dannygiff/)</b>
+
+
+
