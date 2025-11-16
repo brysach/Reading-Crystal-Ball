@@ -81,7 +81,7 @@
     }
     </script>
     <script src="https://js.puter.com/v2/"></script>
-    <button onclick="loading(callGenerateStoryFunc())">Story Time!</button>
+    <button onclick="loadingFunction(callGenerateStoryFunc())">Story Time!</button>
     <button id="speak">Speak</button>
     </div>
 
@@ -105,13 +105,16 @@
         let isPlaying = false;
         let i = 0;
         let audio;
+        
         let loadingScreen =  document.getElementById("loading");
-        let loading = async (promise) => {
+        let loadingFunction = (promise) => {
            loadingScreen.style.zIndex = "1000"
            loadingScreen.style.visibility = "visible"
-           await promise;
-           loadingScreen.style.zIndex = "-1"
-           loadingScreen.style.visibility = "hidden"
+           promise.then(() => {
+                loadingScreen.style.zIndex = "-1"
+                loadingScreen.style.visibility = "hidden"
+           });
+           
         }
         document.getElementById("speak").onclick = async () => {
             let t = storyData;

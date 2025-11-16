@@ -18,7 +18,7 @@ def generateFantasyStory():
         if image_name.endswith(".png"):
             filename = os.path.join(folder_dir, image_name)
             images_array.append(Image.open(filename))
-            os.remove(filename)
+            #os.remove(filename)
 
 
 
