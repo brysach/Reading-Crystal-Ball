@@ -6,7 +6,7 @@
 
 # Getting Started
 #### 1. Install python
-#### 2. `pip install flask opencv-python`
+#### 2. `pip install flask opencv-python pillow`
 #### 3. `pip install -U google-genai`
 #### 4. Set an evironment variable with `export GEMINI_API_KEY=<key>`
 #### 5. `python FlaskTesting.py`
