@@ -153,6 +153,21 @@
             max-width: 400px;
             border-radius: 5px;
         }
+        #loading{
+            position: fixed;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            visibility: hidden;
+            display: grid;
+            place-content: center;
+            place-items: center;
+            width: 100%;
+            height: 100%;
+            background-color: #333333a2;
+        }
     </style>
 </head>
 <body>
@@ -174,7 +189,7 @@
     }
     </script>
     <script src="https://js.puter.com/v2/"></script>
-    <button onclick="callGenerateStoryFunc()">Story Time!</button>
+    <button onclick="loadingFunction(callGenerateStoryFunc())">Story Time!</button>
     <button id="speak">Speak</button>
     </div>
     </div>
@@ -263,8 +278,23 @@
         </ul>
         <button id="close-help">Close</button>
     </div>
+    <div id="loading">
+        <img src="/static/goose.gif" style="width: 150px; border-radius: 25px;">
+        <h1 style="color: white;">Gemini is Loading</h1>
+    </div>
 
 <script>
+
+let loadingScreen =  document.getElementById("loading");
+        let loadingFunction = (promise) => {
+           loadingScreen.style.zIndex = "1000"
+           loadingScreen.style.visibility = "visible"
+           setTimeout(() => {
+                loadingScreen.style.zIndex = "-1"
+                loadingScreen.style.visibility = "hidden"
+           }, 10000);
+           
+        }
 document.addEventListener("DOMContentLoaded", () => {
     const helpIcon = document.getElementById("help-icon");
     const helpPopup = document.getElementById("help-popup");
